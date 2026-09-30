@@ -1,4 +1,10 @@
-# AWS Certified AI Practitioner (AIF-C01) Exam Simulator & Cram
+# AWS Certified AI Practitioner (AIF-C01) Pocket Trainer
+
+[![Deploy to GitHub Pages](https://github.com/evecount/AWS-aif-c01-pocket-trainer/actions/workflows/deploy.yml/badge.svg)](https://github.com/evecount/AWS-aif-c01-pocket-trainer/actions/workflows/deploy.yml)
+
+> **🚀 Live Web App:**  
+> 👉 **[https://evecount.github.io/AWS-aif-c01-pocket-trainer/](https://evecount.github.io/AWS-aif-c01-pocket-trainer/)**  
+> *(To activate, ensure **Settings > Pages > Source** is set to **GitHub Actions**)*
 
 A mobile-first, zero-latency exam simulator and rapid-fire study app designed specifically for passing the **AWS Certified AI Practitioner (AIF-C01)** certification exam on your first attempt.
 
@@ -65,3 +71,16 @@ Targets the most common pitfalls where candidates lose easy points on the exam:
 * **Passing Score**: **700** (~70% to 72% raw accuracy).
 * **Compensatory Model**: You do not need to pass each section individually. Because **Domains 2 and 3 make up 52% of the entire exam**, mastering Generative AI and Bedrock gives you a massive advantage to easily clear the 700 threshold.
 * **No Penalty for Guessing**: Never leave a question blank on exam day!
+
+---
+
+## 🚀 1-Click Deployment to GitHub Pages
+
+This repository is pre-configured with **GitHub Actions** and relative asset bundling (`base: './'`) for zero-configuration GitHub Pages hosting:
+
+1. Push your latest code to `main`.
+2. Open your repository's Pages settings directly at:  
+   👉 **[https://github.com/evecount/AWS-aif-c01-pocket-trainer/settings/pages](https://github.com/evecount/AWS-aif-c01-pocket-trainer/settings/pages)**
+3. Under **Build and deployment** > **Source**, switch from *"Deploy from a branch"* to **"GitHub Actions"**.
+4. GitHub Actions automatically executes `.github/workflows/deploy.yml` and publishes your live site at:  
+   👉 **[https://evecount.github.io/AWS-aif-c01-pocket-trainer/](https://evecount.github.io/AWS-aif-c01-pocket-trainer/)**
