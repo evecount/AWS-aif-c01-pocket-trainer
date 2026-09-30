@@ -28,7 +28,7 @@ export interface Question {
 
 export interface ProductComparison {
   id: string;
-  category: 'GenAI vs ML Platform' | 'Search & Knowledge' | 'Responsible AI' | 'Perception & NLP' | 'ML Metrics' | 'Enterprise Assistants';
+  category: 'GenAI vs ML Platform' | 'Search & Knowledge' | 'Responsible AI' | 'Perception & NLP' | 'ML Metrics' | 'Enterprise Assistants' | 'Security & Governance';
   serviceA: string;
   serviceB: string;
   coreDistinction: string;

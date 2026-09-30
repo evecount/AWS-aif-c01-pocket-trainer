@@ -10,10 +10,12 @@ import {
   RotateCcw,
   Clock,
   Play,
-  Pause
+  Pause,
+  Zap
 } from 'lucide-react';
 import { Question } from '../types';
 import { soundEffects } from '../utils/audio';
+import { AwsCheatSheetModal } from './AwsCheatSheetModal';
 
 interface QuizCardProps {
   question: Question;
@@ -55,6 +57,7 @@ export function QuizCard({
   formatTimer
 }: QuizCardProps) {
   const [selectedOption, setSelectedOption] = useState<'A' | 'B' | 'C' | 'D' | null>(savedAnswer || null);
+  const [showCheatSheet, setShowCheatSheet] = useState<boolean>(false);
 
   // Sync when question changes or saved answer exists
   useEffect(() => {
@@ -250,13 +253,15 @@ export function QuizCard({
                   </>
                 )}
               </span>
-
-              {question.confusingProductNote && (
-                <span className="text-[10px] bg-amber-100 text-amber-900 border border-amber-300 px-1 py-0.2 rounded font-medium truncate max-w-[180px]">
-                  {question.confusingProductNote}
-                </span>
-              )}
             </div>
+
+            {/* Applicable Exam Trigger Banner (Only displayed when product differentiators apply) */}
+            {question.confusingProductNote && (
+              <div className="mb-2 px-2.5 py-1.5 bg-amber-50 border border-amber-300 rounded-md text-[11px] text-amber-950 flex items-start gap-1.5 leading-snug shadow-2xs">
+                <span className="font-black text-amber-800 shrink-0">⚡ Exam Trigger:</span>
+                <span className="font-medium">{question.confusingProductNote}</span>
+              </div>
+            )}
 
             {/* Core Why Explanation */}
             <p className="text-[11.5px] leading-relaxed text-slate-800 font-medium mb-2">
@@ -290,12 +295,12 @@ export function QuizCard({
         )}
       </div>
 
-      {/* Bottom Action Bar: Full-Width 50/50 Prev and Next Buttons */}
-      <div className="shrink-0 pt-2 border-t border-slate-200 grid grid-cols-2 gap-2 w-full">
+      {/* Bottom Action Bar: Full-Width 3-Column Prev / ⚡ Cheat Sheet / Next */}
+      <div className="shrink-0 pt-2 border-t border-slate-200 grid grid-cols-[1fr_auto_1fr] gap-1.5 sm:gap-2 w-full items-center">
         <button
           onClick={onPrev}
           disabled={currentIndex === 0}
-          className={`h-10 px-4 rounded-lg border text-xs font-bold flex items-center justify-center gap-1.5 transition-all w-full ${
+          className={`h-10 px-2 sm:px-4 rounded-lg border text-xs font-bold flex items-center justify-center gap-1 transition-all w-full ${
             currentIndex === 0
               ? 'bg-slate-100 border-slate-200 text-slate-300 cursor-not-allowed'
               : 'bg-white border-slate-300 text-slate-700 hover:bg-slate-100 active:scale-[0.98]'
@@ -306,17 +311,32 @@ export function QuizCard({
         </button>
 
         <button
+          onClick={() => setShowCheatSheet(true)}
+          title="Open AWS AI/ML Core Products Cheat Sheet"
+          className="h-10 px-2.5 sm:px-3 rounded-lg border border-amber-300 bg-amber-50 hover:bg-amber-100 text-amber-950 font-bold text-xs flex items-center justify-center gap-1.5 shadow-2xs transition-all active:scale-[0.98] whitespace-nowrap"
+        >
+          <Zap className="w-3.5 h-3.5 text-amber-600 fill-amber-500" />
+          <span>Cheat Sheet</span>
+        </button>
+
+        <button
           onClick={onNext}
-          className={`h-10 px-4 rounded-lg font-bold text-xs flex items-center justify-center gap-1.5 shadow-xs transition-all active:scale-[0.98] w-full ${
+          className={`h-10 px-2 sm:px-4 rounded-lg font-bold text-xs flex items-center justify-center gap-1 shadow-xs transition-all active:scale-[0.98] w-full ${
             currentIndex + 1 >= totalQuestions
               ? 'bg-emerald-700 hover:bg-emerald-600 text-white'
               : 'bg-slate-900 hover:bg-slate-800 text-white'
           }`}
         >
-          <span>{currentIndex + 1 >= totalQuestions ? 'Finish Exam (65/65)' : 'Next Question'}</span>
+          <span>{currentIndex + 1 >= totalQuestions ? 'Finish Exam' : 'Next Question'}</span>
           <ChevronRight className="w-4 h-4" />
         </button>
       </div>
+
+      {/* AWS Products Cheat Sheet Modal */}
+      <AwsCheatSheetModal
+        isOpen={showCheatSheet}
+        onClose={() => setShowCheatSheet(false)}
+      />
     </div>
   );
 }

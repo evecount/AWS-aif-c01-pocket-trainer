@@ -120,5 +120,17 @@ export const PRODUCT_COMPARISONS: ProductComparison[] = [
     examTriggerA: ['High variance', 'Memorizes training data', 'High train score, low test score', 'Fix with dropout / regularization / data augmentation'],
     examTriggerB: ['High bias', 'Model is too simple', 'Low train score, low test score', 'Fix with more complex model / feature engineering'],
     trapWarning: 'Overfitting = High Variance. Underfitting = High Bias. Remember: "Variance is Vexing on Validation".'
+  },
+  {
+    id: 'macie-vs-guardrails',
+    category: 'Security & Governance',
+    serviceA: 'Amazon Macie',
+    serviceB: 'Amazon Bedrock Guardrails',
+    coreDistinction: 'Macie scans stored S3 buckets at rest to discover and inventory unencrypted PII; Bedrock Guardrails filters and masks PII in live prompts and completions at runtime.',
+    whenToChooseA: 'You need to scan Amazon S3 buckets or data lakes to discover, classify, and alert on sensitive PII (credit cards, SSNs, passports) before training models.',
+    whenToChooseB: 'You need live runtime protection to redact PII (phone numbers, emails, SSNs) and block toxic topics in real-time foundation model chatbot conversations.',
+    examTriggerA: ['Discover PII in S3', 'Sensitive data inventory', 'Audit S3 bucket security', 'Data at rest'],
+    examTriggerB: ['Runtime prompt masking', 'Live chatbot safety', 'Redact PII in completions', 'Denied topics'],
+    trapWarning: 'Macie is for S3 DATA AT REST. Guardrails is for LIVE PROMPTS/COMPLETIONS AT RUNTIME. (Mnemonic: Macie = Monitors S3 for PII).'
   }
 ];

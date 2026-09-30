@@ -2,5 +2,7 @@
   "name": "AWS AI Practitioner (AIF-C01) Quizmaster",
   "description": "Mobile-first exam cram and rapid-fire quizmaster for the AWS Certified AI Practitioner (AIF-C01) exam with instant answer breakdown, core domain drills, and service differentiator cheat sheet.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

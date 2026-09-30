@@ -61,6 +61,12 @@ const PRODUCT_DRILLS = [
     correct: 'SageMaker Model Cards',
     options: ['SageMaker Model Cards', 'SageMaker Model Dashboard', 'Amazon CloudWatch', 'AWS Systems Manager'],
     reason: 'Model Cards document static governance metadata & intended use; Model Dashboard monitors live operational drift.'
+  },
+  {
+    prompt: 'You need an automated AWS service to scan millions of archived text files stored in Amazon S3 buckets to discover and inventory unencrypted Personally Identifiable Information (PII) before training a foundation model.',
+    correct: 'Amazon Macie',
+    options: ['Amazon Macie', 'Amazon Bedrock Guardrails', 'Amazon Inspector', 'AWS Secrets Manager'],
+    reason: 'Amazon Macie uses ML to discover, classify, and protect sensitive PII in Amazon S3 buckets at rest. (Macie = Monitors S3 for PII).'
   }
 ];
 

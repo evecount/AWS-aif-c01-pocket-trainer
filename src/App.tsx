@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { QuizCard } from './components/QuizCard';
 import { ScoreReportModal } from './components/ScoreReportModal';
+import { OFFICIAL_EXAM_ROUND_65 } from './data/officialExamQuestions';
 import { EXAM_QUESTIONS } from './data/examQuestions';
 import { getAllPracticeQuestions } from './data/practiceTests';
 import { Question, QuizProgress } from './types';
@@ -23,16 +24,19 @@ export default function App() {
     saveProgress(progress);
   }, [progress]);
 
-  // Master bank of questions (built-in blueprint + tests 1-7)
+  // Master bank of questions, prioritized with the pristine OFFICIAL_EXAM_ROUND_65
   const masterPool: Question[] = useMemo(() => {
     const practiceQs = getAllPracticeQuestions();
-    return [...practiceQs, ...EXAM_QUESTIONS];
+    return [...OFFICIAL_EXAM_ROUND_65, ...practiceQs, ...EXAM_QUESTIONS];
   }, []);
 
-  // 65-question round deck
+  // 65-question round deck: Round 1 is exactly the pristine 65 official exam questions
   const activeDeck = useMemo(() => {
     if (isReviewingMissed) {
       return masterPool.filter(q => progress.answered[q.id]?.isCorrect === false);
+    }
+    if (currentRound === 1) {
+      return OFFICIAL_EXAM_ROUND_65;
     }
     const startIndex = ((currentRound - 1) * ROUND_SIZE) % masterPool.length;
     let roundSlice = masterPool.slice(startIndex, startIndex + ROUND_SIZE);
